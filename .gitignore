@@ -5,3 +5,5 @@ Release/
 mx.scratch
 .settings/
 .vscode/
+.clangd
+.metadata/
