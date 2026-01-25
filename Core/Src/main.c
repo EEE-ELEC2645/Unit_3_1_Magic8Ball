@@ -69,7 +69,7 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
-srand(HAL_GetTick()); // Seed the random number generator with the current tick value
+  srand(HAL_GetTick()); // Seed the random number generator with the current tick value
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
@@ -126,7 +126,9 @@ srand(HAL_GetTick()); // Seed the random number generator with the current tick 
   while (1)
   {
 
-
+  // Check if button is pressed, the onboard button B1 is active low 
+  // pressed - 0V, not pressed - 3.3V
+  // HAL_GPIO_ReadPin returns GPIO_PIN_RESET (0) or GPIO_PIN_SET (1)
     if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET) {
       // Button is pressed (active low)
       printf("Button pressed! Generating Magic 8-Ball response...\n");
@@ -148,6 +150,13 @@ srand(HAL_GetTick()); // Seed the random number generator with the current tick 
 
 void Display8BallMessage(ST7789V2_cfg_t* cfg, int idx)
 {
+  
+  // LD2_GPIO_Port and LD2_Pin are defined in main.h, which is a shortcut 
+  // for the on-board LED on the Nucleo board. 
+  // Which is connected to PA5 (pin 5 of GPIO port A)
+  // Pinstate is active high, so setting it to 1 turns the LED on
+  // Pinstate is actually a GPIO_PinState enum (GPIO_PIN_RESET, GPIO_PIN_SET), 
+  // but 0 and 1 work fine for low and high
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
 
   uint16_t txt_x =40;
