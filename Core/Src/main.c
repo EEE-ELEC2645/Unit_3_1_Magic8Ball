@@ -159,7 +159,11 @@ void Display8BallMessage(ST7789V2_cfg_t* cfg, int idx)
   
   // LD2_GPIO_Port and LD2_Pin are defined in main.h, which is a shortcut 
   // for the on-board LED on the Nucleo board. 
-  // Which is connected to PA5 (pin 5 of GPIO port A)
+  // The LED is connected to PA5 (pin 5 of GPIO port A)
+  // We could write the port and pin directly like HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,1);
+  // But we have defined easier names in main.h so we use those instead, that way if we change boards or pins
+  // we can just change main.h and not all the code 
+
   // Pinstate is active high, so setting it to 1 turns the LED on
   // Pinstate is actually a GPIO_PinState enum (GPIO_PIN_RESET, GPIO_PIN_SET), 
   // but 0 and 1 work fine for low and high
