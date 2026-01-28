@@ -120,7 +120,7 @@ Written by Aeron Jarvis and James Avery
 
 
 // ========== Buffer Configuration ==========
-#define BUFFER_LENGTH ST7789V2_HEIGHT*ST7789V2_WIDTH/2  // 4 pixels per byte (2 bits per pixel)
+#define BUFFER_LENGTH ST7789V2_HEIGHT*ST7789V2_WIDTH/2  // 2 pixels per byte (4 bits per pixel)
 
 // ========== Function Prototypes ==========
 
